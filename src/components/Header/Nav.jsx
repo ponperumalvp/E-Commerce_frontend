@@ -30,6 +30,10 @@ const Nav = () => {
       path: "/contact",
       name: "Contact",
     },
+    {
+      path: "/createProduct",
+      name: "Create",
+    },
   ];
 
   return (

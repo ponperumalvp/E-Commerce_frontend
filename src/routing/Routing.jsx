@@ -9,6 +9,7 @@ import ProductList from "../shared/productList/ProductList";
 import DecorPage from "../pages/DecorPage";
 import KitchenPage from "../pages/KitchenPage";
 import BedroomPage from "../pages/BedroomPage";
+import CreateProduct from "../pages/CreateProduct";
 
 const Routing = () => {
   const { isLogin } = useSelector((store) => store.user);
@@ -33,6 +34,7 @@ const Routing = () => {
             <Route index element={<BedroomPage />} />
             <Route path=":id" element={<ProductDeatils />} />
           </Route>
+          <Route path="/createProduct" element={<CreateProduct />} />
         </Route>
       ) : (
         <>

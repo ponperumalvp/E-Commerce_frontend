@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const ProductCard = ({ product, link }) => {
   const { id, name, rate, number, featured, src } = product;
+  console.log(product);
   return (
     <div className="container ">
       <div className="border-white bg-bgClr shadow-lg rounded-lg  ">
