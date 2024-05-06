@@ -1,16 +1,3 @@
-import decor1 from "../images/decor/decor1.png";
-import decor2 from "../images/decor/decor2.png";
-import decor3 from "../images/decor/decor3.png";
-import decor4 from "../images/decor/decor4.png";
-import kitchen1 from "../images/kitchen/kitchen1.png";
-import kitchen2 from "../images/kitchen/kitchen2.png";
-import kitchen3 from "../images/kitchen/kitchen3.png";
-import kitchen4 from "../images/kitchen/kitchen4.png";
-import bedroom1 from "../images/bedroom/bedroom1.png";
-import bedroom2 from "../images/bedroom/bedroom2.png";
-import bedroom3 from "../images/bedroom/bedroom3.png";
-import bedroom4 from "../images/bedroom/bedroom4.png";
-
 export const products = [
   {
     image:
