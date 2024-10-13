@@ -30,7 +30,7 @@ const Login = () => {
       console.log(newUserDetails);
       const resp = await dispatch(verifyUser(newUserDetails));
       console.log("verifyuser", resp);
-      dispatch(setuser([...resp.payload.data.userId, resp.payload.data.token]));
+      // dispatch(setuser([...resp.payload.data.userId, resp.payload.data.token]));
       resp.payload.data.message === "login successful"
         ? (await dispatch(setIsLogin(true))) && history("/home")
         : await dispatch(setIsLogin(false));
@@ -67,8 +67,11 @@ const Login = () => {
           value={newUser.password}
           onChange={handleChange}
         />
-        <div className="w-[90%] flex items-center justify-center mt-10">
-          <Button className="bg-primaryClr text-white" onclick={handleSubmit}>
+        <div className="w-[85%] flex items-center justify-center mt-10">
+          <Button
+            className="bg-primaryClr  text-white h-8"
+            onclick={handleSubmit}
+          >
             Sign In
           </Button>
         </div>
@@ -79,7 +82,7 @@ const Login = () => {
         </div>
 
         <div className="w-[40%] flex justify-center mt-2">
-          <Button className="bg-primaryClr text-white" link="/">
+          <Button className="bg-primaryClr text-white h-8" link="/">
             Sign Up
           </Button>
         </div>

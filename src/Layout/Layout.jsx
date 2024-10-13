@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import Routing from "../routing/Routing";
 import Header from "../components/Header/Header";
 import { useNavigate } from "react-router-dom";
+import Footers from "../components/Footer/Footers";
 
 const Layout = () => {
   const { isLogin } = useSelector((store) => store.user);
@@ -19,7 +20,7 @@ const Layout = () => {
           <div>
             <Routing />
           </div>
-          {/* <Footer /> */}
+          <Footers />
         </div>
       ) : (
         <div>

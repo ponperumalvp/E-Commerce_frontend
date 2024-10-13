@@ -1,17 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import bedroomImg from "../../assets/images/bedroom/bedroom4.png";
+import { useDispatch } from "react-redux";
+import * as Io from "react-icons/io";
+import { Button } from "flowbite-react";
 
-const ProductCard = ({ product, link }) => {
-  const { id, name, rate, number, featured, src } = product;
-  console.log(product);
+const ProductCard = ({ product, link, handlefunction }) => {
+  const dispatch = useDispatch();
+  const { _id, name, price, number, featured, image } = product;
+
   return (
     <div className="container ">
       <div className="border-white bg-bgClr shadow-lg rounded-lg  ">
         <div className="">
           <div className="relative">
-            <img src={src} alt="" className="rounded-lg w-[100%] h-[300px] " />
+            <Link
+              to={`${link}/${_id}`}
+              className="no-underline text-secondaryClr hover:text-thirdClr"
+            >
+              <img
+                src={image ? image : bedroomImg}
+                alt=""
+                className="rounded-lg w-[100%] h-[300px] "
+              />
+            </Link>
+            <button
+              onClick={() => handlefunction(_id)}
+              className="absolute top-0 right-0"
+            >
+              <Io.IoMdHeart className="w-8 h-8 text-red-400" />
+            </button>
+
             {featured && (
-              <span className="absolute bottom-0  right-0 h-[max-content] w-[max-content]  bg-[var(--primary-color)] rounded-md p-1 text-black">
+              <span className="absolute top-0  left-0 h-[max-content] w-[max-content]  bg-[var(--primary-color)] rounded-md p-1 bg-thirdClr text-white">
                 NEW
               </span>
             )}
@@ -22,22 +43,23 @@ const ProductCard = ({ product, link }) => {
           <div>
             <h5 className="mt-3 p-2 ">
               <Link
-                to={`${link}/${id}`}
-                className="no-underline hover:text-[var(--secondary-color)]"
+                to={`${link}/${_id}`}
+                className="no-underline text-lg font-serif text-secondaryClr hover:text-thirdClr"
               >
                 {name}
               </Link>
             </h5>
-            <div className=" mt-3 flex items-center justify-between p-2">
+            <div className=" mt-3 flex items-center text-lg text-secondaryClr font-serif   justify-between p-2">
               <h5>
-                ${rate} <span className="text-sm" />
+                ${price}.00 <span className="text-sm" />
               </h5>
+
               <button className="w-[max-content] h-[max-content] bg-[var(--secondary-color)]  rounded-md p-1">
                 <Link
-                  to={`${link}/${id}`}
+                  to={`${link}/${_id}`}
                   className=" text-primaryClr no-underline"
                 >
-                  Book Now
+                  <Button>Buy Now</Button>
                 </Link>
               </button>
             </div>

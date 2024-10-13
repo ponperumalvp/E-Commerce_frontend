@@ -7,10 +7,9 @@ import Input from "../components/input/Input";
 import Button from "../components/button/Button";
 
 const Register = () => {
-  const { newUser, User } = useSelector((store) => store.user);
+  const { newUser } = useSelector((store) => store.user);
   const dispatch = useDispatch();
   const history = useNavigate();
-  console.log(User);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -67,7 +66,10 @@ const Register = () => {
           onChange={handleChange}
         />
         <div className="w-[90%] flex items-center justify-center mt-10">
-          <Button className="bg-primaryClr text-white" onclick={handleSubmit}>
+          <Button
+            className="bg-primaryClr text-white h-8"
+            onclick={handleSubmit}
+          >
             Register
           </Button>
         </div>
@@ -78,7 +80,7 @@ const Register = () => {
         </div>
 
         <div className="w-[40%] flex justify-center mt-2">
-          <Button className="bg-primaryClr text-white" link="/login">
+          <Button className="bg-primaryClr text-white h-8" link="/login">
             Login
           </Button>
         </div>

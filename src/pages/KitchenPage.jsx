@@ -1,14 +1,34 @@
 import React from "react";
-import { products } from "../assets/data/product";
-import PageCompenent from "../components/pageComponent/PageCompenent";
+import { useDispatch, useSelector } from "react-redux";
+import ProductList from "../shared/productList/ProductList";
+import { saveProduct } from "../Redux/productSlice";
 
 const KitchenPage = () => {
-  const kitchenpage = products.filter((item) => {
-    return item.product === "kitchen" || item.category === "bedroom";
+  const dispatch = useDispatch();
+
+  const { Products } = useSelector((store) => store.product);
+  const kitchenpage = Products.filter((item) => {
+    return item.category === "kitchen" || item.category === "bedroom";
   });
+  console.log(kitchenpage);
+  // const filterPage = (content1, content2) => {
+  //   return Products.filter(
+  //     (item) => item.category === content1 || item.category === content2
+  //   );
+  // };
+  const handleSavedProduct = (productId) => {
+    const userId = sessionStorage.getItem("userId");
+
+    dispatch(saveProduct({ userId: userId, productId: productId }));
+  };
+
   return (
-    <div>
-      <PageCompenent children={kitchenpage} link={"/kitchen"} />
+    <div className="lg:w-[80%] mx-auto">
+      <ProductList
+        children={kitchenpage}
+        link={"/kitchen"}
+        handlefunction={handleSavedProduct}
+      />
     </div>
   );
 };

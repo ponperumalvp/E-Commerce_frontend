@@ -19,6 +19,7 @@ export const createUser = createAsyncThunk(
       const res = await axios.post(`${baseUrl}/register`, postData);
       console.log(res.data.message);
       if (res.data.message === "register successful") {
+        await sessionStorage.setItem("userId", res.data.userId);
         await setItem("userId", res.data.userId);
         await setItem("accessToken", res.data.token);
         await setItem("userName", res.data.userName);
@@ -40,11 +41,12 @@ export const verifyUser = createAsyncThunk(
     try {
       const res = await axios.post(`${baseUrl}/login`, postData);
       console.log(res);
-      console.log(res.data.message);
 
       if (res.data.message === "login successful") {
+        console.log(res.data.userId);
+        sessionStorage.setItem("userId", res.data.userId);
         await setItem("userId", res.data.userId);
-        await setItem("accessToken", res.data.token);
+        // await setItem("accessToken", res.data.token);
         await setItem("userName", res.data.userName);
         // toast.success(res.data.message);
 
