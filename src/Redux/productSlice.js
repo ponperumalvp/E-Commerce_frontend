@@ -6,7 +6,7 @@ const initialState = {
   Products: [],
   newProduct: "",
   savedProducts: [],
-  saveProduct: "",
+  saveProduct: [],
   cartProducts: [],
   cartProduct: "",
   myProducts: [],
@@ -48,7 +48,7 @@ export const saveProduct = createAsyncThunk(
       const response = await axios.put(`${baseUrl}/product/saved`, postData);
       console.log(response);
 
-      return response.data.savedProducts;
+      return response.data.savedProduct;
     } catch (err) {
       return thunk.rejectWithValue(err.response.data);
     }
@@ -74,7 +74,7 @@ export const cartProduct = createAsyncThunk(
   async (postData, thunk) => {
     try {
       console.log(postData);
-      const response = await axios.post(`${baseUrl}/product/cart`, postData);
+      const response = await axios.post(`${baseUrl}/cart`, postData);
       console.log(response);
 
       return response.data.cartProduct;
@@ -88,7 +88,7 @@ export const getCartProduct = createAsyncThunk(
   async (_, thunk) => {
     try {
       const userId = await sessionStorage.getItem("userId");
-      const response = await axios.get(`http://localhost:4000/cart/${userId}`);
+      const response = await axios.get(`${baseUrl}/cart/${userId}`);
       console.log(response);
       console.log(response.data.cartProducts);
       return response.data.cartProducts;
@@ -117,9 +117,7 @@ export const deleteCartProduct = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       console.log(id);
-      const res = await axios.delete(
-        `http://localhost:4000/cart/deleteCart/${id}`
-      );
+      const res = await axios.delete(`${baseUrl}/cart/deleteCart/${id}`);
       console.log(res.data._id);
       return res.data._id;
     } catch (err) {
@@ -180,6 +178,7 @@ const productSlice = createSlice({
       .addCase(saveProduct.pending, (state, action) => {})
       .addCase(saveProduct.fulfilled, (state, action) => {
         state.saveProduct = action.payload;
+        console.log("jasdfsdjkfsdjkhfsjdkfhsdjkfsdjk", state.saveProduct);
       })
       .addCase(saveProduct.rejected, (state, action) => {
         state.errMsg = action.payload;
@@ -187,7 +186,7 @@ const productSlice = createSlice({
       .addCase(getSavedProduct.pending, (state, action) => {})
       .addCase(getSavedProduct.fulfilled, (state, action) => {
         state.savedProducts = action.payload;
-        console.log(action.payload);
+        console.log("savedprofusbdsfsdfsdhhsd", state.savedProducts);
       })
       .addCase(getSavedProduct.rejected, (state, action) => {
         state.errMsg = action.payload;

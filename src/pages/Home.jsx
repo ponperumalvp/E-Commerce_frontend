@@ -33,10 +33,17 @@ const Home = () => {
     };
     getData();
   }, [dispatch]);
-  const handleSavedProduct = (productId) => {
+  useEffect(() => {
+    const getData = () => {
+      dispatch(getSavedProduct());
+    };
+    getData();
+  }, [dispatch]);
+  const handleSavedProduct = async (productId) => {
     const userId = sessionStorage.getItem("userId");
 
-    dispatch(saveProduct({ userId: userId, productId: productId }));
+    await dispatch(saveProduct({ userId: userId, productId: productId }));
+    dispatch(getSavedProduct());
   };
   const { Products } = useSelector((store) => store.product);
   console.log(Products);

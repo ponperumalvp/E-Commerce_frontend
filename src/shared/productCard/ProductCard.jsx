@@ -1,13 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import bedroomImg from "../../assets/images/bedroom/bedroom4.png";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as Io from "react-icons/io";
 import { Button } from "flowbite-react";
+// import SavedProducts from "../../pages/SavedProducts";
 
 const ProductCard = ({ product, link, handlefunction }) => {
   const dispatch = useDispatch();
   const { _id, name, price, number, featured, image } = product;
+  const { savedProducts } = useSelector((store) => store.product);
 
   return (
     <div className="container ">
@@ -28,7 +30,11 @@ const ProductCard = ({ product, link, handlefunction }) => {
               onClick={() => handlefunction(_id)}
               className="absolute top-0 right-0"
             >
-              <Io.IoMdHeart className="w-8 h-8 text-red-400" />
+              {savedProducts.find((item) => item._id === _id) ? (
+                <Io.IoMdHeart className={`w-8 h-8 text-red-500`} />
+              ) : (
+                <Io.IoMdHeart className={`w-8 h-8 text-white`} />
+              )}
             </button>
 
             {featured && (
