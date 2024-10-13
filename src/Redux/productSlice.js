@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { baseUrl2 } from "../config/config";
+import { baseUrl } from "../config/config";
 
 const initialState = {
   Products: [],
@@ -20,7 +20,7 @@ export const createProduct = createAsyncThunk(
   async (postData, thaunk) => {
     try {
       console.log(postData);
-      const response = await axios.post(`${baseUrl2}/create`, postData);
+      const response = await axios.post(`${baseUrl}/product/create`, postData);
       console.log(response);
       return response.data;
     } catch (err) {
@@ -32,7 +32,7 @@ export const getProduct = createAsyncThunk(
   "product/getProduct",
   async (_, thunk) => {
     try {
-      const response = await axios.get(`${baseUrl2}`);
+      const response = await axios.get(`${baseUrl}/product`);
       console.log(response);
       return response.data;
     } catch (err) {
@@ -45,7 +45,7 @@ export const saveProduct = createAsyncThunk(
   async (postData, thunk) => {
     try {
       console.log(postData);
-      const response = await axios.put(`${baseUrl2}/saved`, postData);
+      const response = await axios.put(`${baseUrl}/product/saved`, postData);
       console.log(response);
 
       return response.data.savedProducts;
@@ -60,7 +60,7 @@ export const getSavedProduct = createAsyncThunk(
   async (_, thunk) => {
     try {
       const userId = await sessionStorage.getItem("userId");
-      const response = await axios.get(`${baseUrl2}/getSaved/${userId}`);
+      const response = await axios.get(`${baseUrl}/product/getSaved/${userId}`);
       console.log(response);
       console.log(response.data.savedProducts);
       return response.data.savedProducts;
@@ -74,7 +74,7 @@ export const cartProduct = createAsyncThunk(
   async (postData, thunk) => {
     try {
       console.log(postData);
-      const response = await axios.post("http://localhost:4000/cart", postData);
+      const response = await axios.post(`${baseUrl}/product/cart`, postData);
       console.log(response);
 
       return response.data.cartProduct;
@@ -101,7 +101,10 @@ export const deleteSavedProduct = createAsyncThunk(
   "product/deleteSavedProduct",
   async (postData, thunkAPI) => {
     try {
-      const res = await axios.delete(`${baseUrl2}/deleteSaved`, postData);
+      const res = await axios.delete(
+        `${baseUrl}/product/deleteSaved`,
+        postData
+      );
       console.log(res);
       return res.data._id;
     } catch (err) {
